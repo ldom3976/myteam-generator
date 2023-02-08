@@ -1,0 +1,13 @@
+header {
+    text-align: center;
+    padding: 50px;
+    background: rgb(243, 96, 96);
+}
+
+.flex-wrap {
+    display: flex;
+    flex: wrap;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
