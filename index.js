@@ -56,21 +56,21 @@ const promptManager = function () {
         },
         {
             type: 'input',
-            name: 'phone',
-            message: 'What is the phone number of the employee?',
-            validate: phone => {
-            if (phone) {
+            name: 'office',
+            message: 'What is the office phone number of the employee?',
+            validate: office => {
+            if (office) {
                 return true;
             } else {
-                console.log('Enter a phone number.');
+                console.log('Enter an office phone number.');
                 return false;
             }
 
             }
         },
     ]).then(managerData => {
-        const { nameInput, id, email, phone } = managerData;
-        const manager = new Manager(nameInput, id, email, phone);
+        const { nameInput, id, email, officeNumber } = managerData;
+        const manager = new Manager(nameInput, id, email, officeNumber);
         employees.push(manager);
     })
 };
