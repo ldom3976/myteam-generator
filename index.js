@@ -171,7 +171,7 @@ const promptMenu = function (employees) {
             employee = new Intern(name, id, email, school);
             console.log(employee);
         }
-        employees.push(employee);
+        employees.push(employees);
 
         if(confirmAddEmployee) {
             return menu(employees)
@@ -183,7 +183,7 @@ const promptMenu = function (employees) {
 };
 
 promptManager()
-.then(menu)
+.then(promptMenu)
 .then(data => {
     const pageHTML = pageTemplate(data)
 
@@ -195,6 +195,4 @@ promptManager()
             console.log("Team page was created. Check index.html")
         }
     })
-});
-
-promptManager()
+});45
