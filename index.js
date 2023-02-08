@@ -1,15 +1,12 @@
-//cleaned up code
-//added menu
-//need to work on employee files
-
 const inquirer = require("inquirer");
-const fs = require('fs');
 const Manager = require('./lib/Manager.js');
 const Intern = require('./lib/Intern.js');
 const Engineer = require('./lib/Engineer.js');
-const Employee = require('./lib/Employee.js');
+//const Employee = require('./lib/Employee.js');
+const fs = require('fs');
 const pageTemplate = require('./dist/pageTemplate');
 
+//array for employees
 var employees = [];
 
 const promptManager = function () {
@@ -19,8 +16,8 @@ const promptManager = function () {
             type: 'input',
             name: 'name',
             message: "What is the manager's name?",
-            validate: nameInput => {
-                if (nameInput) {
+            validate: name => {
+                if (name) {
                     return true;
                 } else {
                     console.log("Enter the manager's name.");
@@ -68,16 +65,18 @@ const promptManager = function () {
 
             }
         },
-    ]).then(managerData => {
-        const { nameInput, id, email, officeNumber } = managerData;
-        const manager = new Manager(nameInput, id, email, officeNumber);
+    ])
+    
+    .then(managerData => {
+        const { name, id, email, officeNumber } = managerData;
+        const manager = new Manager(name, id, email, officeNumber);
         employees.push(manager);
     })
 };
 
 
 //menu
-const promptMenu = function () {
+const promptMenu = function (employees) {
     return inquirer.prompt([
         {
             type: 'list',
@@ -86,11 +85,11 @@ const promptMenu = function () {
             choices: ['Engineer', 'Intern']
         },
         {
-            type: 'text',
+            type: 'input',
             name: 'name',
             message: 'What is the name of the employee?',
-            validate: name => {
-                if (name) {
+            validate: nameInput => {
+                if (nameInput) {
                     return true;
                 } else {
                     console.log('Enter a name.');
@@ -99,7 +98,7 @@ const promptMenu = function () {
             }
         },
         {
-            type: 'text',
+            type: 'input',
             name: 'id',
             message: 'What is the employee ID?',
             validate: idInput => {
@@ -112,7 +111,7 @@ const promptMenu = function () {
             }
         },
         {
-            type: 'text',
+            type: 'input',
             name: 'email',
             message: "What is the employee's email address?",
             validate: emailInput => {
@@ -125,7 +124,7 @@ const promptMenu = function () {
             }
         },
         {
-            type: 'text',
+            type: 'input',
             name: 'github',
             message: "What is the employee's GitHub username?",
             when: (input) => input.role === 'Engineer',
@@ -139,7 +138,7 @@ const promptMenu = function () {
             }
         },
         {
-            type: 'text',
+            type: 'input',
             name: 'school',
             message: 'Where does the intern attend school?',
             when: (input) => input.role === 'Intern',
@@ -177,7 +176,7 @@ const promptMenu = function () {
         if(confirmAddEmployee) {
             return menu(employees)
         } else {
-            console.log(employees);
+            //console.log(employees);
             return employees;
         }
     })
@@ -186,5 +185,16 @@ const promptMenu = function () {
 promptManager()
 .then(menu)
 .then(data => {
-    
-})
+    const pageHTML = pageTemplate(data)
+
+    fs.writeFile('./index.html', pageHTML, err => {
+        if (err) {
+            console.log(err);
+            return;
+        } else {
+            console.log("Team page was created. Check index.html")
+        }
+    })
+});
+
+promptManager()
