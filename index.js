@@ -197,4 +197,4 @@ promptManager()
             console.log("Team page was created. Check index.html")
         }
     })
-});45
+});
