@@ -2,12 +2,12 @@ const inquirer = require("inquirer");
 const Manager = require('./lib/Manager.js');
 const Intern = require('./lib/Intern.js');
 const Engineer = require('./lib/Engineer.js');
-//const Employee = require('./lib/Employee.js');
+const Employee = require('./lib/Employee.js');
 const fs = require('fs');
 const pageTemplate = require('./dist/pageTemplate');
 
 //array for employees
-var employees = [];
+let employees = [];
 
 const promptManager = function () {
     //prompts manager
@@ -76,7 +76,7 @@ const promptManager = function () {
 
 
 //menu
-const promptMenu = function (employees) {
+const promptMenu = function () {
     return inquirer.prompt([
         {
             type: 'list',
@@ -155,7 +155,7 @@ const promptMenu = function (employees) {
             type: 'confirm',
             name: 'confirmAddEmployee',
             message: 'Add another employee?',
-            default: false
+            //default: false
         }
 
     ])
@@ -165,16 +165,18 @@ const promptMenu = function (employees) {
         let employee;
 
         if(role === 'Engineer') {
-            employee = new Engineer(name, id, email, github);
+           employee = new Engineer(name, id, email, github);
             console.log(employee);
+
         } else if (role === 'Intern') {
             employee = new Intern(name, id, email, school);
             console.log(employee);
         }
-        employees.push(employees);
+        employees.push(employee);
+        //console.log(employees);
 
         if(confirmAddEmployee) {
-            return menu(employees)
+            return promptMenu(employees)
         } else {
             //console.log(employees);
             return employees;
