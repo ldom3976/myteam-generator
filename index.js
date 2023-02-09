@@ -4,7 +4,7 @@ const Intern = require('./lib/Intern.js');
 const Engineer = require('./lib/Engineer.js');
 const Employee = require('./lib/Employee.js');
 const fs = require('fs');
-const pageTemplate = require('./dist/pageTemplate');
+const pageTemplate = require('./src/pageTemplate');
 
 //array for employees
 let employees = [];
