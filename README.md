@@ -8,7 +8,7 @@ This team profile generator creates a webpage that displays a team's information
 
 Make sure to install the npm inquirer package by running `npm install` and `npm i inquirer` in the terminal. Then, run `node index.js` which will generate a series of prompts about the manager, then employees. After the desired team has been inputted, this will generate an HTML page. 
 
-See [Demo Video]
+See [Demo Video](https://drive.google.com/file/d/1lZVenNcLemc65knBVA8d2fkTOH3GbkOu/view)
 
 ## Technologies Used
 * node.js
@@ -21,7 +21,7 @@ See [Demo Video]
 ## Visual Representation
 ### Screenshot:
 
-
+![Alt text](dist/assets/teamscreen.png)
 
 ## Tests
 
