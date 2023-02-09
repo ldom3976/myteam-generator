@@ -9,6 +9,7 @@ const pageTemplate = require('./dist/pageTemplate');
 //array for employees
 let employees = [];
 
+//function to add manager
 const promptManager = function () {
     //prompts manager
     return inquirer.prompt([
@@ -67,6 +68,7 @@ const promptManager = function () {
         },
     ])
     
+    //generates manager profile and goes to menu
     .then(managerData => {
         const { name, id, email, officeNumber } = managerData;
         const manager = new Manager(name, id, email, officeNumber);
@@ -77,6 +79,7 @@ const promptManager = function () {
 
 //menu
 const promptMenu = function () {
+    //select engineer, intern, or finish
     return inquirer.prompt([
         {
             type: 'list',
@@ -160,6 +163,7 @@ const promptMenu = function () {
 
     ])
 
+    //adds new team member to array
     .then(employeesData => {
         let { name, id, email, role, github, school, confirmAddEmployee} = employeesData;
         let employee;
@@ -189,6 +193,7 @@ promptManager()
 .then(data => {
     const pageHTML = pageTemplate(data)
 
+    //generates html page
     fs.writeFile('./index.html', pageHTML, err => {
         if (err) {
             console.log(err);
